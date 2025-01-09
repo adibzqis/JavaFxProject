@@ -1,6 +1,7 @@
 package CSC3104PROJECT;
 
 import javafx.application.Application;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -17,6 +18,8 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -30,20 +33,28 @@ public class studentPage extends Application {
     @Override
     public void start(Stage stage) {
     	
-    	Button backButton = new Button("Back");
+    	Image backImage = new Image(getClass().getResourceAsStream("undo.png"));
+    	ImageView backIV = new ImageView(backImage);
+    	backIV.setFitWidth(23);
+    	backIV.setFitHeight(23);
+    	
+    	Button backButton = new Button("",backIV);
+    	backButton.setCursor(Cursor.HAND);
     	backButton.setOnAction(e -> {
             firstPage firstPage = new firstPage();
             firstPage.start(stage);
     	});
     	
     	HBox goBack = new HBox (backButton);
-    	goBack.setAlignment(Pos.CENTER_LEFT);
+    	goBack.setPadding(new Insets(10,10,10,10));
     	
     	Label loginLabel = new Label("Login");
     	loginLabel.setPadding((new Insets(25 ,0 ,0 ,0)));
     	loginLabel.setStyle(
-    	"-fx-font-size : 20px;" +
-    	"-fx-font-weight : bold;"
+    	"-fx-font-family: 'Arial Rounded MT Bold'; " +
+    	"-fx-font-size : 28px;" +
+    	"-fx-font-weight : bold;" +
+    	"-fx-text-fill: #FF4444;"
     			);
     	
     	HBox loginBox = new HBox(10, loginLabel);
@@ -51,16 +62,17 @@ public class studentPage extends Application {
     	
     	Label usernameLabel = new Label("Username");
     	usernameLabel.setStyle(
+    	"-fx-font-family: 'Arial Rounded MT Bold'; " +
     	"-fx-font-size : 12px;"		
     			);
     	
     	usernameTF = new TextField();
     	usernameTF.setPromptText("Enter your username");
     	usernameTF.setPrefWidth(200);
-    	usernameTF.setPrefHeight(25);
+    	usernameTF.setPrefHeight(35);
     	
     	HBox usernameLabelBox = new HBox(10, usernameLabel);
-    	usernameLabelBox.setPadding(new Insets(0, 0, 0, 202));
+    	usernameLabelBox.setPadding(new Insets(0, 0, 0, 81));
     	
     	HBox usernameTFBox = new HBox(usernameTF);
     	usernameTFBox.setAlignment(Pos.CENTER);
@@ -69,53 +81,67 @@ public class studentPage extends Application {
     	
     	Label passwordLabel = new Label("Password");
     	passwordLabel.setStyle(
+    	"-fx-font-family: 'Arial Rounded MT Bold'; " +
     	"-fx-font-size : 12px;"		
     			);
     	
     	passwordTF = new TextField();
     	passwordTF.setPromptText("Enter your password");
     	passwordTF.setPrefWidth(200);
-    	passwordTF.setPrefHeight(25);
+    	passwordTF.setPrefHeight(35);
     	
     	HBox passwordLabelBox = new HBox(10, passwordLabel);
-    	passwordLabelBox.setPadding(new Insets(0, 0, 0, 202));
+    	passwordLabelBox.setPadding(new Insets(0, 0, 0, 81));
     	
     	HBox passwordTFBox = new HBox(passwordTF);
     	passwordTFBox.setAlignment(Pos.CENTER);
     	
-    	VBox verticalPassword = new VBox(5, passwordLabelBox, passwordTFBox);
+    	Label forgotLabel = new Label("Forgot Password?");
+    	forgotLabel.setCursor(Cursor.HAND);
+    	forgotLabel.setPadding(new Insets (0,0,0,81));
+    	forgotLabel.setStyle(
+    			"-fx-font-size: 10px; " +
+    			"-fx-text-fill: darkblue; " +
+    			"-fx-underline: true;"	
+    			);
+    	
+    	forgotLabel.setOnMouseClicked( event -> {
+    		forgotPassPage forgotPassPage = new forgotPassPage();
+    		forgotPassPage.start(stage);
+    	});
+    	
+    	VBox verticalPassword = new VBox(5, passwordLabelBox, passwordTFBox, forgotLabel);
     	
     	Button signinButton = new Button("Sign In");
+    	signinButton.setPrefHeight(20);
+    	signinButton.setPrefWidth(80);
+    	signinButton.setCursor(Cursor.HAND);
+    	signinButton.setStyle(
+    			"-fx-font-size : 14px;" +
+    			"-fx-font-weight : bold;"
+    			);
     	signinButton.setOnAction(event -> signinMethod());
     	
     	HBox signinBox = new HBox(signinButton);
     	signinBox.setAlignment(Pos.CENTER);
     	
-    	Label forgotLabel = new Label("Forgot Password?");
-    	forgotLabel.setStyle(
-    	"-fx-font-size : 10px;"		
-    			);
-    	
-    	forgotLabel.setOnMouseClicked( event -> {});
-    	
-    	forgotLabel.setOnMouseEntered(event -> forgotLabel.setStyle(
-    			"-fx-font-size: 10px; -fx-text-fill: darkblue; -fx-underline: true;"
-    			));
-    	
-        forgotLabel.setOnMouseExited(event -> forgotLabel.setStyle(
-        		"-fx-font-size: 10px; -fx-text-fill: blue; -fx-underline: true;"
-        		));
-    	
-    	HBox forgotBox = new HBox(10, forgotLabel);
-    	forgotBox.setAlignment(Pos.CENTER);
-    	
     	Button signupButton = new Button("Sign Up");
-    	signupButton.setOnAction(event -> signupMethod());
+    	signupButton.setPrefHeight(20);
+    	signupButton.setPrefWidth(80);
+    	signupButton.setCursor(Cursor.HAND);
+    	signupButton.setStyle(
+    			"-fx-font-size : 14px;" +
+    		    "-fx-font-weight : bold"
+    			);
+    	signupButton.setOnAction(e -> {
+    		verifyPage verifyPage = new verifyPage();
+    		verifyPage.start(stage);
+    	});
     	
     	HBox signupBox = new HBox(10, signupButton);
     	signupBox.setAlignment(Pos.CENTER);
     	
-    	VBox wholeVertical = new VBox(25, goBack, loginBox, verticalUser, verticalPassword, signinBox, forgotBox, signupBox);
+    	VBox wholeVertical = new VBox(30, goBack, loginBox, verticalUser, verticalPassword, signinBox, signupBox);
         wholeVertical.setStyle("-fx-background-color: linear-gradient(to bottom, #FFCCCC, #FFFFFF);");
 
         // Create an empty scene
@@ -136,11 +162,6 @@ public class studentPage extends Application {
     		errorText.showAndWait();
     	};
     }
-    
-    public void signupMethod() {
-    	
-    }
-
     public static void main(String[] args) {
         launch(args);
     }
