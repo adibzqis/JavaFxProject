@@ -1,6 +1,7 @@
 package CSC3104PROJECT;
 
 import javafx.application.Application;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay; 
@@ -9,10 +10,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import CSC3104PROJECT.studentPage;
+
+import java.io.File;
+
 import CSC3104PROJECT.driverPage;
 
 public class signupPageDriver extends Application {
@@ -24,14 +29,20 @@ public class signupPageDriver extends Application {
     @Override
     public void start(Stage stage) {
     	
-    	Button backButton = new Button("Back");
+    	Image backImage = new Image(getClass().getResourceAsStream("undo.png"));
+    	ImageView backIV = new ImageView(backImage);
+    	backIV.setFitWidth(23);
+    	backIV.setFitHeight(23);
+    	
+    	Button backButton = new Button("",backIV);
+    	backButton.setCursor(Cursor.HAND);
     	backButton.setOnAction(e -> {
-            driverPage driverPage = new driverPage();
-            driverPage.start(stage);
+    		studentPage studentPage = new studentPage();
+            studentPage.start(stage);
     	});
     	
     	HBox goBack = new HBox (backButton);
-    	goBack.setAlignment(Pos.CENTER_LEFT);
+    	goBack.setPadding(new Insets(10,10,10,10));
     	
     	Label signupLabel = new Label("Sign Up");
     	signupLabel.setPadding((new Insets(25 ,0 ,0 ,0)));
@@ -82,7 +93,7 @@ public class signupPageDriver extends Application {
     	    	    	
     	Scene scene = new Scene(wholeVertical, 360, 640);
     	
-        stage.setTitle("Sign Up Page");
+        stage.setTitle("Sign Up Page (Driver)");
         stage.setScene(scene);
         stage.show();
     }
