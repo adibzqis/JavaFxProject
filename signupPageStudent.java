@@ -1,6 +1,7 @@
 package CSC3104PROJECT;
 
 import javafx.application.Application;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay; 
@@ -28,14 +29,20 @@ public class signupPageStudent extends Application {
     @Override
     public void start(Stage stage) {
     	
-    	Button backButton = new Button("Back");
+    	Image backImage = new Image(getClass().getResourceAsStream("undo.png"));
+    	ImageView backIV = new ImageView(backImage);
+    	backIV.setFitWidth(23);
+    	backIV.setFitHeight(23);
+    	
+    	Button backButton = new Button("",backIV);
+    	backButton.setCursor(Cursor.HAND);
     	backButton.setOnAction(e -> {
-            studentPage studentPage = new studentPage();
+    		studentPage studentPage = new studentPage();
             studentPage.start(stage);
     	});
     	
     	HBox goBack = new HBox (backButton);
-    	goBack.setAlignment(Pos.CENTER_LEFT);
+    	goBack.setPadding(new Insets(10,10,10,10));
     	
     	Label signupLabel = new Label("Sign Up");
     	signupLabel.setPadding((new Insets(25 ,0 ,0 ,0)));
@@ -71,34 +78,6 @@ public class signupPageStudent extends Application {
     	HBox passwordBox = new HBox(passwordTF);
     	passwordBox.setAlignment(Pos.CENTER);
     	
-    	Label label = new Label("Please upload a proof\nthat you are a student :)");
-    	HBox labelFile = new HBox(label);
-    	labelFile.setAlignment(Pos.CENTER);
-    	
-    	Button fileChooserButton = new Button("Open a file");
-    	ImageView imgView = new ImageView();
-    	
-    	fileChooserButton.setOnAction(actionEvent -> {
-    		FileChooser fileChooser = new FileChooser();
-    		fileChooser.setTitle("Open a file");
-    		fileChooser.setInitialDirectory(new File("C:\\"));
-    		fileChooser.getExtensionFilters().addAll(
-    				new FileChooser.ExtensionFilter("JPEG image", "*.jpg"),
-    				new FileChooser.ExtensionFilter("PNG image", "*.png"),
-    				new FileChooser.ExtensionFilter("PDF image", "*.pdf"), 
-    				new FileChooser.ExtensionFilter("All Images", "*.jpg", "*.png")
-    				);
-    		File selectedFile = fileChooser.showOpenDialog(stage);
-    		if(selectedFile != null) {
-    			label.setText(selectedFile.getName());
-    			Image image = new Image(selectedFile.getPath());
-    			imgView.setImage(image);
-    		}
-    	});
-    	
-    	HBox fileChooserBox = new HBox( fileChooserButton, imgView);
-    	fileChooserBox.setAlignment(Pos.CENTER);
-    	
     	Button signupButton = new Button("Sign Up");
     	signupButton.setStyle(
     			"-fx-font-size : 20px;" +
@@ -109,12 +88,12 @@ public class signupPageStudent extends Application {
     	HBox signupButtonBox = new HBox(10, signupButton);
     	signupButtonBox.setAlignment(Pos.CENTER);
     	    	
-    	VBox wholeVertical = new VBox(15, goBack, signUp, usernameBox, emailBox, passwordBox, labelFile, fileChooserBox, signupButtonBox);
+    	VBox wholeVertical = new VBox(15, goBack, signUp, usernameBox, emailBox, passwordBox, signupButtonBox);
         wholeVertical.setStyle("-fx-background-color: linear-gradient(to bottom, #FFCCCC, #FFFFFF);");
     	    	    	
     	Scene scene = new Scene(wholeVertical, 360, 640);
     	
-        stage.setTitle("Sign Up Page");
+        stage.setTitle("Sign Up Page (Student)");
         stage.setScene(scene);
         stage.show();
     }
