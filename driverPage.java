@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
@@ -48,6 +49,15 @@ public class driverPage extends Application {
     	HBox goBack = new HBox (backButton);
     	goBack.setPadding(new Insets(10,10,10,10));
     	
+    	Image logoImage = new Image(getClass().getResourceAsStream("logo.png"));
+    	ImageView logoIV = new ImageView(logoImage);
+    	logoIV.setFitHeight(120);
+    	logoIV.setFitWidth(120);
+    	
+    	HBox logoIVBox = new HBox(logoIV);
+    	logoIVBox.setAlignment(Pos.CENTER);
+    	logoIVBox.setPadding(new Insets(0 ,0 ,-50 ,0));
+    	
     	Label loginLabel = new Label("Login");
     	loginLabel.setPadding((new Insets(25 ,0 ,0 ,0)));
     	loginLabel.setStyle(
@@ -86,6 +96,7 @@ public class driverPage extends Application {
     			);
     	
     	passwordTF = new TextField();
+    	PasswordField passwordTF = new PasswordField(); // Use PasswordField for password input
     	passwordTF.setPromptText("Enter your password");
     	passwordTF.setPrefWidth(200);
     	passwordTF.setPrefHeight(35);
@@ -134,14 +145,14 @@ public class driverPage extends Application {
     		    "-fx-font-weight : bold"
     			);
     	signupButton.setOnAction(e -> {
-    		signupPageStudent signupPageStudent = new signupPageStudent();
-    		signupPageStudent.start(stage);
+    		verifyPageDriver verifyPageDriver = new verifyPageDriver();
+    		verifyPageDriver.start(stage);
     	});
     	
     	HBox signupBox = new HBox(10, signupButton);
     	signupBox.setAlignment(Pos.CENTER);
     	
-    	VBox wholeVertical = new VBox(30, goBack, loginBox, verticalUser, verticalPassword, signinBox, signupBox);
+    	VBox wholeVertical = new VBox(30, goBack, logoIVBox, loginBox, verticalUser, verticalPassword, signinBox, signupBox);
         wholeVertical.setStyle("-fx-background-color: linear-gradient(to bottom, #FFCCCC, #FFFFFF);");
 
         // Create an empty scene
