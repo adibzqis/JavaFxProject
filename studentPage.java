@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
@@ -37,6 +38,15 @@ public class studentPage extends Application {
     	ImageView backIV = new ImageView(backImage);
     	backIV.setFitWidth(23);
     	backIV.setFitHeight(23);
+    	
+    	Image logoImage = new Image(getClass().getResourceAsStream("logo.png"));
+    	ImageView logoIV = new ImageView(logoImage);
+    	logoIV.setFitHeight(120);
+    	logoIV.setFitWidth(120);
+    	
+    	HBox logoIVBox = new HBox(logoIV);
+    	logoIVBox.setAlignment(Pos.CENTER);
+    	logoIVBox.setPadding(new Insets(0 ,0 ,-70 ,0));
     	
     	Button backButton = new Button("",backIV);
     	backButton.setCursor(Cursor.HAND);
@@ -85,7 +95,9 @@ public class studentPage extends Application {
     	"-fx-font-size : 12px;"		
     			);
     	
+    	
     	passwordTF = new TextField();
+    	PasswordField passwordTF = new PasswordField(); // Use PasswordField for password input
     	passwordTF.setPromptText("Enter your password");
     	passwordTF.setPrefWidth(200);
     	passwordTF.setPrefHeight(35);
@@ -134,14 +146,14 @@ public class studentPage extends Application {
     		    "-fx-font-weight : bold"
     			);
     	signupButton.setOnAction(e -> {
-    		verifyPage verifyPage = new verifyPage();
+    		verifyPageStudent verifyPage = new verifyPageStudent();
     		verifyPage.start(stage);
     	});
     	
     	HBox signupBox = new HBox(10, signupButton);
     	signupBox.setAlignment(Pos.CENTER);
     	
-    	VBox wholeVertical = new VBox(30, goBack, loginBox, verticalUser, verticalPassword, signinBox, signupBox);
+    	VBox wholeVertical = new VBox(30, goBack, logoIVBox, loginBox, verticalUser, verticalPassword, signinBox, signupBox);
         wholeVertical.setStyle("-fx-background-color: linear-gradient(to bottom, #FFCCCC, #FFFFFF);");
 
         // Create an empty scene
