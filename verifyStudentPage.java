@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-public class verifyPage extends Application {
+public class verifyPageStudent extends Application {
 
     @Override
     public void start(Stage stage) {
@@ -26,13 +26,21 @@ public class verifyPage extends Application {
         backButton.setCursor(Cursor.HAND);
         backButton.setOnAction(e -> {
             studentPage studentPage = new studentPage();
-            studentPage.start(stage);
+            studentPage.start(stage);            
         });
 
         HBox goBack = new HBox(backButton);
-        goBack.setPadding(new Insets(5, 0, 0, 5)); 
         goBack.setAlignment(Pos.TOP_LEFT); 
-
+        
+        Image logoImage = new Image(getClass().getResourceAsStream("logo.png"));
+    	ImageView logoIV = new ImageView(logoImage);
+    	logoIV.setFitHeight(120);
+    	logoIV.setFitWidth(120);
+    	
+    	HBox logoIVBox = new HBox(logoIV);
+    	logoIVBox.setAlignment(Pos.CENTER);
+    	logoIVBox.setPadding(new Insets(0 ,0 ,-50 ,0));
+        
         // Title Label
         Label titleLabel = new Label("UPM Student");
         titleLabel.setPadding(new Insets(25, 0, 0, 0));
@@ -100,7 +108,7 @@ public class verifyPage extends Application {
         verifyBox.setAlignment(Pos.CENTER);
 
         // Layout
-        VBox layout = new VBox(25, goBack, titleBox, matricBox, passwordBox, verifyBox);
+        VBox layout = new VBox(25, goBack,logoIVBox,  titleBox, matricBox, passwordBox, verifyBox);
         layout.setPadding(new Insets(20));
         layout.setStyle("-fx-background-color: linear-gradient(to bottom, #FFCCCC, #FFFFFF);");
 
@@ -114,4 +122,4 @@ public class verifyPage extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-}
+}  
