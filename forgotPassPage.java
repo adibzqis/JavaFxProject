@@ -25,6 +25,15 @@ public class forgotPassPage extends Application {
         ImageView backIV = new ImageView(backImage);
         backIV.setFitWidth(23);
         backIV.setFitHeight(23);
+        
+        Image logoImage = new Image(getClass().getResourceAsStream("logo.png"));
+    	ImageView logoIV = new ImageView(logoImage);
+    	logoIV.setFitHeight(120);
+    	logoIV.setFitWidth(120);
+    	
+    	HBox logoIVBox = new HBox(logoIV);
+    	logoIVBox.setAlignment(Pos.CENTER);
+    	logoIVBox.setPadding(new Insets(0 ,0 ,-50 ,0));
 
         Button backButton = new Button("", backIV);
         backButton.setCursor(Cursor.HAND);
@@ -111,7 +120,7 @@ public class forgotPassPage extends Application {
         content.setAlignment(Pos.CENTER);
         content.setPadding(new Insets(20));
 
-        VBox wholeVertical = new VBox(goBack, content);
+        VBox wholeVertical = new VBox(goBack, logoIVBox, content);
         wholeVertical.setStyle("-fx-background-color: linear-gradient(to bottom, #FFCCCC, #FFFFFF);");
 
         Scene scene = new Scene(wholeVertical, 360, 640);
